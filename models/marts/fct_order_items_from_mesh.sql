@@ -1,1 +1,0 @@
-select * from {{ ref('PaulFJune2026', 'fct_order_items') }}
