@@ -1,0 +1,58 @@
+sources:
+  - name: tpch_now
+    database: RAW
+    schema: TPCH_NOW
+#    config: 
+#      freshness: 
+#        warn_after:
+#          count: 1
+#          period: day
+#        error_after:
+#          count: 2
+#          period: day
+#        loaded_at_field: _etl_loaded_at
+# - can't do source freshness as no field to base it on
+    tables:
+      - name: lineitem
+      - name: orders
+        columns:
+          - name: o_orderkey
+            data_tests:
+              - not_null
+              - unique
+  - name: tpch
+    database: RAW
+    schema: TPCH_SF001
+    tables:
+      - name: partsupp
+        columns:
+          - name: ps_suppkey
+            data_tests:
+              - not_null
+              - relationships:
+  #              to: ref('_src_tpch')
+                  arguments:
+                    field: s_suppkey
+                    to: source('tpch', 'supplier' )
+          - name: ps_partkey
+            data_tests:
+              - not_null
+              - relationships:
+                  arguments:
+                    field: p_partkey
+                    to: source('tpch', 'part')
+      - name: part
+        columns:
+          - name: p_partkey
+            data_tests:
+              - not_null
+              - unique
+      - name: supplier
+        columns:
+          - name: s_suppkey
+            data_tests:
+              - not_null
+              - unique
+
+
+

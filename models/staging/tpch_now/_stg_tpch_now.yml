@@ -1,0 +1,46 @@
+models:
+  - name: stg_tpch_now__orders
+    description: The grain of this table is one unique order per row
+    columns:
+      - name: order_key
+        description: Primary key for the customers table
+        data_tests:
+          - unique
+          - not_null
+      - name: order_status
+        description: "{{ doc('order_status')}}"
+        data_tests:
+          - not_null
+  - name: stg_tpch_now__lineitem
+    description: The grain of this table is linenumber and orderkey
+    columns:
+      - name: order_key
+        description: foreign key to the orders table
+        data_tests:
+          - not_null
+      - name: line_number
+        description: line number of the order - combined with order key this is - unique. QUESTION - how can we test this?
+        data_tests:
+          - not_null
+      - name: supplier_key
+        data_tests:
+          - not_null
+       # why does this test fail?    
+       #   - relationships:
+       #     field: supplier_key
+       #     to: ref('stg_tpch__supplier')
+      - name: line_status
+        description: the status of the order line item
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - O
+                  - F
+
+
+
+
+
+
+

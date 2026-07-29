@@ -1,0 +1,25 @@
+groups:
+  - name: finance
+    owner:
+      # Email is required to receive model-level notifications, additional properties are also allowed.
+      name: "Finance team"
+      email: paul.field@dbtlabs.com
+
+  - name: marketing
+    owner:
+      name: "Marketing team"
+      email: paul_field98@yahoo.com
+    config:
+      meta:
+        slack: '#marketing-team'
+
+# Example of multiple emails supported
+  - name: documentation team
+    owner:
+      name: "Docs team"
+      email: 
+        - paul.field@dbtlabs.com
+        - paul_field98@yahoo.com
+    config:
+      meta:
+        slack: '#docs-fox'

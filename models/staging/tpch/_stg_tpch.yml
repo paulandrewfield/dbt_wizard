@@ -1,0 +1,12 @@
+models:
+  - name: stg_tpch__supplier
+    description: The grain of this table is the supplier
+    columns:
+      - name: supplier_key
+        description: Primary key for the customers table
+        data_tests:
+          - unique
+          - not_null
+  - name: stg_tpch__partsupp
+    description: the link between parts and supplier
+
